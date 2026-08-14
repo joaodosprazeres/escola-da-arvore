@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks)",
+      "Bash(python3 -)",
+      "Bash(npm run *)",
+      "Bash(supabase --version)",
+      "Bash(supabase status *)",
+      "Bash(supabase start *)",
+      "Bash(supabase stop *)",
+      "Bash(docker stats *)",
+      "Bash(supabase db *)",
+      "Bash(supabase migration *)",
+      "Bash(PGPASSWORD=postgres psql -h 127.0.0.1 -p 54322 -U postgres -d postgres -c \"select version, name from supabase_migrations.schema_migrations order by version;\")",
+      "Bash(docker exec *)"
+    ]
+  }
+}

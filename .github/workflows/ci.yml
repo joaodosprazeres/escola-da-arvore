@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verificacao:
+    runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_URL: http://127.0.0.1:54321
+      VITE_SUPABASE_ANON_KEY: chave-anonima-local-de-teste
+      LOGIN_IP_PEPPER: pepper-de-ci
+      ALLOWED_ORIGIN: http://localhost:5173
+      APP_BASE_URL: http://localhost:5173
+      SENHA_ADMIN_SEED: SenhaDeDesenvolvimento#2026
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck (Princípio I)
+        run: npm run typecheck
+
+      - name: Lint e formatação
+        run: npm run lint
+
+      - name: Testes unitários
+        run: npm run test:unit
+
+      - name: Testes de integração (fake in-memory)
+        run: npm run test:integration
+
+      - name: Testes de acessibilidade
+        run: npm run test:a11y
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Supabase local (efêmero — jamais o projeto de produção)
+        run: |
+          supabase start
+          supabase db reset --local
+
+      - name: Testes de RLS
+        run: npm run test:rls
+
+      - name: Tipos do banco em dia (falha em diff)
+        run: |
+          supabase gen types typescript --local > src/services/supabase/database.types.ts
+          git diff --exit-code -- src/services/supabase/database.types.ts
+
+      - name: Build
+        run: npm run build

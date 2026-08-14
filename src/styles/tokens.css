@@ -1,0 +1,204 @@
+/*
+ * Tokens do design system — cópia fiel de docs/design-system.md §7 e §7.1.
+ * Origem única da verdade de cor, tipografia, espaçamento e superfície (Princípio VI).
+ * Divergência entre este arquivo e o documento resolve-se alterando o documento primeiro.
+ */
+
+/*
+ * `@import` precisa ser a primeira regra do arquivo (restrição do próprio CSS), por isso ele
+ * aparece aqui e não junto do bloco `@theme` como está impresso em §7.1. O resto do §7.1 segue
+ * literal, depois do `:root`.
+ */
+@import 'tailwindcss';
+
+:root {
+  /* Cores — base */
+  --cor-verde-escuro: #263822;
+  --cor-preto: #000000;
+  --cor-laranja: #c35e0a;
+  --cor-oliva: #87852f;
+  --cor-cinza-form: #e3e3e3;
+  --cor-branco: #ffffff;
+
+  /* Cores — variantes para texto branco */
+  --cor-laranja-escuro: #a85208;
+  --cor-oliva-escuro: #6e6c26;
+
+  /* Cores — semânticas */
+  --cor-erro: #8a1f11;
+  --cor-sucesso: #6e6c26;
+  --cor-aviso: #c35e0a;
+  --cor-info: #263822;
+
+  /* Cores — texto */
+  --cor-texto-escuro: #000000;
+  --cor-texto-claro: #ffffff;
+  --cor-foco: #000000;
+
+  /* Tipografia */
+  --fonte-base-familia:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --fonte-mono: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', monospace;
+  --fonte-xs: 0.75rem;
+  --fonte-sm: 0.875rem;
+  --fonte-base: 1rem;
+  --fonte-lg: 1.125rem;
+  --fonte-xl: 1.375rem;
+  --fonte-2xl: 1.75rem;
+  --fonte-3xl: 2.25rem;
+  --peso-normal: 400;
+  --peso-medio: 600;
+  --peso-forte: 700;
+  --entrelinha-apertada: 1.2;
+  --entrelinha-base: 1.5;
+  --entrelinha-solta: 1.7;
+
+  /* Espaçamento */
+  --esp-1: 4px;
+  --esp-2: 8px;
+  --esp-3: 12px;
+  --esp-4: 16px;
+  --esp-5: 24px;
+  --esp-6: 32px;
+  --esp-7: 48px;
+  --esp-8: 64px;
+
+  /* Layout */
+  --largura-conteudo: 72rem;
+  --alvo-toque-min: 44px;
+
+  /* Superfícies */
+  --raio-sm: 4px;
+  --raio-md: 8px;
+  --borda-fina: 1px;
+  --borda-grossa: 2px;
+  --sombra-1: 0 1px 2px rgb(0 0 0 / 0.12);
+  --sombra-2: 0 4px 12px rgb(0 0 0 / 0.16);
+
+  /* Movimento */
+  --transicao-rapida: 120ms ease-out;
+  --transicao-base: 200ms ease-out;
+}
+
+/* Contexto de fundo escuro: inverte texto e anel de foco */
+.sobre-escuro {
+  color: var(--cor-texto-claro);
+  --cor-foco: var(--cor-branco);
+}
+
+@theme {
+  /* 1. Apaga tudo que o Tailwind traz de fábrica */
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --font-weight-*: initial;
+  --leading-*: initial;
+  --tracking-*: initial;
+  --spacing: initial;
+  --spacing-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --container-*: initial;
+  --breakpoint-*: initial;
+  --animate-*: initial;
+
+  /* 2. Publica os tokens da seção 7, sem renomear a origem */
+  --color-verde-escuro: var(--cor-verde-escuro);
+  --color-preto: var(--cor-preto);
+  --color-laranja: var(--cor-laranja);
+  --color-laranja-escuro: var(--cor-laranja-escuro);
+  --color-oliva: var(--cor-oliva);
+  --color-oliva-escuro: var(--cor-oliva-escuro);
+  --color-cinza-form: var(--cor-cinza-form);
+  --color-branco: var(--cor-branco);
+  --color-erro: var(--cor-erro);
+  --color-sucesso: var(--cor-sucesso);
+  --color-aviso: var(--cor-aviso);
+  --color-info: var(--cor-info);
+  --color-texto-escuro: var(--cor-texto-escuro);
+  --color-texto-claro: var(--cor-texto-claro);
+  --color-foco: var(--cor-foco);
+
+  --font-base: var(--fonte-base-familia);
+  --font-mono: var(--fonte-mono);
+
+  --text-xs: var(--fonte-xs);
+  --text-sm: var(--fonte-sm);
+  --text-base: var(--fonte-base);
+  --text-lg: var(--fonte-lg);
+  --text-xl: var(--fonte-xl);
+  --text-2xl: var(--fonte-2xl);
+  --text-3xl: var(--fonte-3xl);
+
+  --font-weight-normal: var(--peso-normal);
+  --font-weight-medio: var(--peso-medio);
+  --font-weight-forte: var(--peso-forte);
+
+  --leading-apertada: var(--entrelinha-apertada);
+  --leading-base: var(--entrelinha-base);
+  --leading-solta: var(--entrelinha-solta);
+
+  --spacing-1: var(--esp-1);
+  --spacing-2: var(--esp-2);
+  --spacing-3: var(--esp-3);
+  --spacing-4: var(--esp-4);
+  --spacing-5: var(--esp-5);
+  --spacing-6: var(--esp-6);
+  --spacing-7: var(--esp-7);
+  --spacing-8: var(--esp-8);
+  --spacing-alvo-toque: var(--alvo-toque-min);
+
+  --radius-sm: var(--raio-sm);
+  --radius-md: var(--raio-md);
+  --shadow-1: var(--sombra-1);
+  --shadow-2: var(--sombra-2);
+  --container-conteudo: var(--largura-conteudo);
+
+  /* 3. Breakpoints: literais obrigatórios — @media não aceita var() */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* Base da aplicação — §6.2 (anel de foco) e §6.5 (movimento reduzido) */
+@layer base {
+  html {
+    font-family: var(--fonte-base-familia);
+    font-size: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--cor-branco);
+    color: var(--cor-texto-escuro);
+    font-size: var(--fonte-base);
+    line-height: var(--entrelinha-base);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--cor-foco);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    line-height: var(--entrelinha-apertada);
+    margin: 0;
+  }
+
+  /* O foco programático no <h1> a cada troca de rota não desenha anel (§B.3) */
+  h1[tabindex='-1']:focus {
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
